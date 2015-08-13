@@ -1,0 +1,26 @@
+{
+  "name": "h5-ejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h5-static/h5-ejs.git"
+  },
+  "author": "yyy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/h5-static/h5-ejs/issues"
+  },
+  "homepage": "https://github.com/h5-static/h5-ejs#readme",
+  "dependencies": {
+    "dpciconfig": "^1.0.1",
+    "ejs": "^2.3.3",
+    "gulp-cortex-handlebars-compiler": "^1.2.7",
+    "log": "^1.4.0",
+    "q": "^1.4.1"
+  }
+}
