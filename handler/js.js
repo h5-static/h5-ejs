@@ -1,11 +1,11 @@
 var Tpl = require("../util/tpl");
 var EJS = require("ejs");
-var jsTemplate = '<script async src="<%- value%>">'
+var jsTemplate = '<script async src="<%- value%>"></script>'
 var Log = require('log')
   ,log = new Log('info');
 var CORTEXT_JSON = "cortex.json";
 var path = require("path");
-
+var fs = require("fs");
 
 function stripBOM(content) {
   // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -30,13 +30,14 @@ module.exports = function(options){
 	var isCombo = options.combo || false;
 	
 	return function(jsStr){
-	
+					
 		if(!isCombo){
 			var cortexJson;
 			var dep = [];
 
 			tryCatch(function(){
 				cortexJson = JSON.parse(stripBOM(fs.readFileSync(path.join(options.cwd,CORTEXT_JSON),"utf8")));;
+
 			},"cortex.json文件解析失败");
 
 			['dependencies', 'devDependencies'].forEach(function(item){
@@ -51,7 +52,6 @@ module.exports = function(options){
 					value:dep.join(",")
 				})
 			});
-
 			
 		}
 		return comboJsStr + EJS.render(Tpl.facade,{

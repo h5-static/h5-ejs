@@ -14,7 +14,7 @@ HCompile = function(fileContent,options){
 	// 加载处理器
 	self.options = options = Tool.mix(options || {},self._loadHandler());
 
-	return return new Buffer(EJS.render(fileContent,self.options));
+	return new Buffer(EJS.render(fileContent,self.options));
 }
 
 HCompile.prototype._loadHandler = function(){
