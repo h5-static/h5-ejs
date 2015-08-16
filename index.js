@@ -29,5 +29,4 @@ HCompile.prototype._loadHandler = function(){
 	}),result);
 }
 
-new HCompile(fs.readFileSync("./test.html","utf-8"));
 module.exports = HCompile;
