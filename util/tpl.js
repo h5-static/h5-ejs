@@ -1,6 +1,6 @@
 module.exports = {
 	static:"{{{ static '<%- value%>'}}}",
-	modify:"{{{ modify '<%- value%>'}}}",
+	modfile:"{{{ modfile '<%- value%>'}}}",
 	combo:"{{{ combo '<%- value%>'}}}",
 	version:"{{{ version }}}",
 	facade:"{{{ facade '<%- value%>'}}}"

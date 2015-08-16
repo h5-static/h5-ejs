@@ -20,7 +20,7 @@ module.exports = function(options){
 
 			cssArr.forEach(function(item){
 				result.push(EJS.render(cssTemplate,{
-					value:EJS.render(Tool.isRelative(item)?Tpl.static:Tpl.modify,{
+					value:EJS.render(Tool.isRelative(item)?Tpl.static:Tpl.modfile,{
 						value:item
 					})
 				}) )
