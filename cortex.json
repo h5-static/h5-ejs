@@ -1,0 +1,41 @@
+{
+  "name": "app-newwallet-static",
+  "version": "0.2.6",
+  "main":"test.js",
+  "description": "The coolest cortex module.",
+  "entries": [
+    "entries/**/*.js"
+  ],
+  "css": [
+    "css/**/*"
+  ],
+  "devDependencies": {
+    "assert": "*"
+  },
+  "dependencies": {
+    "dpapp": "^1.1.2",
+    "util-efte-loading": "~0.1.2",
+    "zepto": "^1.2.1",
+    "riot": "~1.0.3",
+    "huatuo": "~0.3.0",
+    "hippo": "^1.2.6",
+    "model-data": "~0.1.1",
+    "util-h5-cat": "~0.1.9",
+    "base-m-lazyload": "^3.0.1",
+    "debugger": "~0.1.7",
+    "mbase-css": "^1.0.2"
+  },
+  "repository": "git://code.dianpingoa.com/app-static/app-newwallet-static.git",
+  "keywords": [
+    "newwallet"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "yyy",
+    "email": "super.doter.yyy@gmail.com"
+  },
+  "bugs": {
+    "url": "http://code.dianpingoa.com/app-static/app-newwallet-static/issues"
+  },
+  "homepage": "http://code.dianpingoa.com/app-static/app-newwallet-static"
+}

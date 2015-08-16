@@ -13,8 +13,8 @@ HCompile = function(fileContent,options){
 
 	// 加载处理器
 	self.options = options = Tool.mix(options || {},self._loadHandler());
-	debugger;
-	return EJS.render(fileContent,self.options)
+
+	return return new Buffer(EJS.render(fileContent,self.options));
 }
 
 HCompile.prototype._loadHandler = function(){
@@ -30,5 +30,4 @@ HCompile.prototype._loadHandler = function(){
 }
 
 new HCompile(fs.readFileSync("./test.html","utf-8"));
-
 module.exports = HCompile;
