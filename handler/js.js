@@ -31,7 +31,7 @@ module.exports = function(options){
 	
 	return function(jsStr){
 					
-		if(!isCombo){
+		if(isCombo){
 			var cortexJson;
 			var dep = [];
 

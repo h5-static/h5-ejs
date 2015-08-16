@@ -8,7 +8,7 @@ module.exports = function(options){
 	var isCombo = options.combo || false;
 	return function(cssStr){
 		// combo处理
-		if(!isCombo){
+		if(isCombo){
 			return  EJS.render(cssTemplate,{
 				value:EJS.render(Tpl.combo,{
 					value:cssStr
