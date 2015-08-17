@@ -27,6 +27,7 @@ function tryCatch(cb,content){
 	}
 }
 
+
 module.exports = function(options,cb){
 	var comboJsStr = "";
 	var isCombo = options.combo || false;
@@ -61,7 +62,9 @@ module.exports = function(options,cb){
 
 			cb(function(jsStr){
 				return EJS.render(Tpl.combo,{
-					value:_walk(shrinkwrap,"",result).join(",")
+					value:EJS.render(jsTemplate,{
+						value:_walk(shrinkwrap,"",result).push(jsStr).join(",")
+					});
 				})+EJS.render(Tpl.facade,{
 					value:jsStr
 				});
