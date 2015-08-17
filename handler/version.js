@@ -1,7 +1,7 @@
 var Tpl = require("../util/tpl");
 
-module.exports = function(options){
-	return function(){
-		return Tpl.version;
-	}
+module.exports = function(options,cb){
+	cb(function(str){
+		return Tpl.version
+	});
 }

@@ -1,6 +1,6 @@
 {
   "name": "h5-ejs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/h5-static/h5-ejs#readme",
   "dependencies": {
+    "async": "^1.4.2",
     "dpciconfig": "^1.0.1",
     "ejs": "^2.3.3",
     "gulp-cortex-handlebars-compiler": "^1.2.7",

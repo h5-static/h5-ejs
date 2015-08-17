@@ -6,6 +6,8 @@ var Log = require('log')
 var CORTEXT_JSON = "cortex.json";
 var path = require("path");
 var fs = require("fs");
+var ngraph = require('neuron-graph');
+
 
 function stripBOM(content) {
   // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -25,37 +27,52 @@ function tryCatch(cb,content){
 	}
 }
 
-module.exports = function(options){
+module.exports = function(options,cb){
 	var comboJsStr = "";
 	var isCombo = options.combo || false;
 	
-	return function(jsStr){
-					
-		if(isCombo){
-			var cortexJson;
-			var dep = [];
 
-			tryCatch(function(){
-				cortexJson = JSON.parse(stripBOM(fs.readFileSync(path.join(options.cwd,CORTEXT_JSON),"utf8")));;
+	if(isCombo){
+		var cortexJson;
+		var dep = [];
 
-			},"cortex.json文件解析失败");
+		tryCatch(function(){
+			cortexJson = JSON.parse(stripBOM(fs.readFileSync(path.join(options.cwd,CORTEXT_JSON),"utf8")));;
 
-			['dependencies', 'devDependencies'].forEach(function(item){
-				if (cortexJson.hasOwnProperty(item)) {
-					for(key in cortexJson[item])
-						dep.push(key);
-			    }
+		},"cortex.json文件解析失败");
+
+		ngraph(cortexJson,{
+		    cwd: options.cwd,
+		    built_root: path.join(options.cwd, process.env.CORTEX_DEST || 'neurons'),
+		    dependencyKeys: ['dependencies']
+		}, function(err, graph, shrinkwrap){
+			var result = [];
+			function _walk(obj,name,result){
+				if(obj.dependencies){
+					for(key in obj.dependencies){
+						_walk(obj.dependencies[key],key,result);
+					}
+				}
+				if(name && result.indexOf(name) == -1){
+					result.push(name);
+				}
+				return result;
+			}
+
+			cb(function(jsStr){
+				return EJS.render(Tpl.combo,{
+					value:_walk(shrinkwrap,"",result).join(",")
+				})+EJS.render(Tpl.facade,{
+					value:jsStr
+				});
+			})			
+		});
+
+	}else{
+		cb(function(jsStr){
+			return EJS.render(Tpl.facade,{
+				value:jsStr
 			});
-
-			comboJsStr =  EJS.render(jsTemplate,{
-				value:EJS.render(Tpl.combo,{
-					value:dep.join(",")
-				})
-			});
-			
-		}
-		return comboJsStr + EJS.render(Tpl.facade,{
-			value:jsStr
-		})
+		});
 	}
 }
