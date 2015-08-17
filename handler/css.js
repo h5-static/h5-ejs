@@ -6,7 +6,7 @@ var Tool = require("../util/tool");
 
 module.exports = function(options,cb){
 	var isCombo = options.combo || false;
-	cb(isCombo ? function(cssStr){
+	cb(!isCombo ? function(cssStr){
 		var cssArr = cssStr.split(",");
 		var result = [];
 
