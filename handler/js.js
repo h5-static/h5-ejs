@@ -64,7 +64,7 @@ module.exports = function(options,cb){
 				return EJS.render(Tpl.combo,{
 					value:EJS.render(jsTemplate,{
 						value:_walk(shrinkwrap,"",result).push(jsStr).join(",")
-					});
+					})
 				})+EJS.render(Tpl.facade,{
 					value:jsStr
 				});
