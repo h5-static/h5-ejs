@@ -1,6 +1,6 @@
 var Tpl = require("../util/tpl");
 var EJS = require("ejs");
-var jsTemplate = '<script async src="<%- value%>"></script>'
+var jsTemplate = '<script combo src="<%- value%>"></script>'
 var Log = require('log')
   ,log = new Log('info');
 var CORTEXT_JSON = "cortex.json";
@@ -62,7 +62,7 @@ module.exports = function(options,cb){
 
 			cb(function(jsStr){
 				
-				_walk(shrinkwrap,"",result).push(jsStr);
+				_walk(shrinkwrap,"",result).push(jsStr+".js");
 
 				return EJS.render(jsTemplate,{
 					value:EJS.render(Tpl.combo,{
