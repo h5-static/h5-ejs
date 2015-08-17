@@ -62,7 +62,7 @@ module.exports = function(options,cb){
 
 			cb(function(jsStr){
 				
-				_walk(shrinkwrap,"",result).push(jsStr+".js");
+				_walk(shrinkwrap,"",result).push(jsStr.indexOf("/")!= -1 ? jsStr.replace(/\.[^.]+$/,"")+".js" : jsStr);
 
 				return EJS.render(jsTemplate,{
 					value:EJS.render(Tpl.combo,{
