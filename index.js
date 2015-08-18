@@ -22,7 +22,13 @@ HCompile = function(fileContent,options,callback){
 			log.info(err);
 		}else{
 			self.options = options = Tool.mix(options || {},self.result);
-			callback(new Buffer(EJS.render(fileContent,self.options)))
+			
+			try{
+				callback(new Buffer(EJS.render(fileContent,self.options)))
+			}catch(e){
+				log.info("忽略，直接跳过h5-ejs");
+				callback(new Buffer(fileContent));
+			}
 		}
 	});
 }
