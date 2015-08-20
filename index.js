@@ -4,7 +4,7 @@ var configFn = require("./util/config");
 var Log = require('log')
   ,log = new Log('info');
 var fs = require("fs");
-var handler = ["CSS","JS","VERSION"];
+var handler = ["CSS","JS","VERSION","JS_PATH","CSS_PATH"];
 var async = require("async");
 
 HCompile = function(fileContent,options,callback){
@@ -22,12 +22,12 @@ HCompile = function(fileContent,options,callback){
 			log.info(err);
 		}else{
 			self.options = options = Tool.mix(options || {},self.result);
-			
 			try{
-				callback(new Buffer(EJS.render(fileContent,self.options)))
+				debugger;
+				callback&&callback(new Buffer(EJS.render(fileContent,self.options)))
 			}catch(e){
 				log.info("忽略，直接跳过h5-ejs");
-				callback(new Buffer(fileContent));
+				callback&&callback(new Buffer(fileContent));
 			}
 		}
 	});
@@ -41,6 +41,9 @@ HCompile.prototype._loadHandler = function(item,cb){
 		cb();
 	});
 }
+new HCompile(fs.readFileSync("./test.html","utf-8"),{
+	combo:true
+});
 
 
 module.exports = HCompile;
