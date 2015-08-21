@@ -7,7 +7,7 @@ var CORTEXT_JSON = "cortex.json";
 var path = require("path");
 var fs = require("fs");
 var ngraph = require('neuron-graph');
-
+var jsFilterArray = require("../util/lib");
 
 function stripBOM(content) {
   // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -47,6 +47,7 @@ module.exports = function(options,cb){
 		    dependencyKeys: ['dependencies']
 		}, function(err, graph, shrinkwrap){
 			var result = [];
+
 			function _walk(obj,name,result){
 				if(obj.dependencies){
 					for(key in obj.dependencies){
@@ -60,8 +61,13 @@ module.exports = function(options,cb){
 			}
 
 			cb(function(jsStr){
-				
+
 				_walk(shrinkwrap,"",result).push(jsStr.indexOf("/")!= -1 ? jsStr.replace(/\.[^.]+$/,"")+".js" : jsStr);
+
+				// 过滤lib库
+				result = result.filter(function(item){
+					return jsFilterArray.indexOf(item) != -1 ? false : true; 
+				});
 
 				return EJS.render(jsTemplate,{
 					value:EJS.render(Tpl.combo,{

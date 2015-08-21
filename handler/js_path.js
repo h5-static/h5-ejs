@@ -7,7 +7,7 @@ var CORTEXT_JSON = "cortex.json";
 var path = require("path");
 var fs = require("fs");
 var ngraph = require('neuron-graph');
-
+var jsFilterArray = require("../util/lib");
 
 function stripBOM(content) {
   // Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)
@@ -57,12 +57,17 @@ module.exports = function(options,cb){
 				if(name && result.indexOf(name) == -1){
 					result.push(name);
 				}
+
 				return result;
 			}
 
 			cb(function(jsStr){
-				
 				_walk(shrinkwrap,"",result).push(jsStr.indexOf("/")!= -1 ? jsStr.replace(/\.[^.]+$/,"")+".js" : jsStr);
+
+				// 过滤lib库
+				result = result.filter(function(item){
+					return jsFilterArray.indexOf(item) != -1 ? false : true; 
+				});
 
 				return EJS.render(Tpl.combo,{
 						value:result.join(",")
