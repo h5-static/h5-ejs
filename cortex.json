@@ -29,6 +29,9 @@
     "refund"
   ],
   "license": "MIT",
+  "combo":{
+    "filter":["zepto","dp-core","dpapp","riot","class"]
+  },
   "author": {
     "name": "yangchao",
     "email": "yaco.yang@dianping.com"
