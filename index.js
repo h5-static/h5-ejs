@@ -43,8 +43,5 @@ HCompile.prototype._loadHandler = function(item,cb){
 }
 
 
-new HCompile(fs.readFileSync("./test.html","utf-8"),{
-	combo:true
-},function(){})
 
 module.exports = HCompile;
