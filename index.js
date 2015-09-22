@@ -23,7 +23,6 @@ HCompile = function(fileContent,options,callback){
 		}else{
 			self.options = options = Tool.mix(options || {},self.result);
 			try{
-				debugger;
 				callback&&callback(new Buffer(EJS.render(fileContent,self.options)))
 			}catch(e){
 				log.info("忽略，直接跳过h5-ejs");
